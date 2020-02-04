@@ -9,15 +9,15 @@ namespace LuckySpin.Controllers
     {
         //TODO: remove reference to the Singleton Repository
         //      and inject a reference (dbcRepo) to the LuckySpinContext 
-        private Repository repository;
+        private LuckySpinContext dbcrepo;
         Random random = new Random();
 
         /***
          * Controller Constructor
          */
-        public SpinnerController(Repository r)
+        public SpinnerController(LuckySpinContext dbcr)
         {
-            repository = r;
+            dbcrepo = dbcr;
         }
 
         /***
@@ -43,7 +43,7 @@ namespace LuckySpin.Controllers
                 Balance = info.StartingBalance
             };
             //TODO: Update persistent data using dbcRepo.Players.Add() and SaveChanges()
-            repository.CurrentPlayer = player;
+            LuckySpinContext.CurrentPlayer = player;
 
             //TODO: Pass the player Id to SpinIt
             return RedirectToAction("SpinIt");

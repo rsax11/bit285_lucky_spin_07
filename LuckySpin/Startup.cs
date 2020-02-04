@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using LuckySpin.Models;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace LuckySpin
 {
@@ -25,8 +29,8 @@ namespace LuckySpin
             services.AddMvc();
             services.AddTransient<Models.TextTransformService>();
             //TODO: Remove the Singleton Repository
-            services.AddSingleton<Models.Repository>();
-            //TODO: Register the DataBase Context
+
+            services.AddDbContext<LuckySpinContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("LuckySpinDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
